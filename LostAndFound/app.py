@@ -149,7 +149,16 @@ def report_item():
 
     return render_template('report.html', form=form)
 
-
+#search
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    query = request.form.get('query')  # Get search query from form
+    results = []
+    
+    if query:
+        results = Item.query.filter(Item.name.ilike(f"%{query}%")).all()
+    
+    return render_template('search.html', results=results, query=query)
 
 if __name__ == '__main__':
     app.run(debug=True)
