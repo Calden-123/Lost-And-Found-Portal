@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Item</title>
+</head>
+<body>
+    <h2>Report an Item</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <!-- Item Name -->
+        <label for="name">Item Name:</label>
+        {{ form.name(size=30) }}
+        <p>Please provide the name of the item you're reporting.</p>
+
+        <!-- Category (Dropdown) -->
+        <label for="category">Category:</label>
+        {{ form.category() }}
+        <p>Please select the category of the item you're reporting.</p>
+
+        <!-- Description (Larger Textbox) -->
+        <label for="description">Description:</label>
+        {{ form.description(rows=6, cols=40) }}
+        <p>Please explain what happened and provide any details about the item.</p>
+
+        <!-- Location -->
+        <label for="location">Location:</label>
+        {{ form.location(size=30) }}
+        <p>Please be specific about where you found or lost the item (e.g., room number, street name, etc.).</p>
+
+        <!-- Status (Dropdown) -->
+        <label for="status">Status:</label>
+        {{ form.status() }}
+        <p>Please select the status of the item you're reporting (Lost or Found).</p>
+
+        <button type="submit">Submit Report</button>
+    </form>
+
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
