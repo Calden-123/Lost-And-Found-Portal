@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Lost & Found System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Contact Us</h2>
+            <p>If you need assistance or have any questions, feel free to reach out to us using the contact information below.</p>
+
+            <div class="contact-details">
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p><a href="mailto:support@lostandfound.com">support@lostandfound.com</a></p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Phone</h3>
+                    <p><a href="tel:+1234567890">+1 234 567 890</a></p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Office Address</h3>
+                    <p>123 Lost & Found Street,<br>Cityville, ST 98765</p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Social Media</h3>
+                    <p>
+                        <a href="https://facebook.com/lostandfound" target="_blank">Facebook</a><br>
+                        <a href="https://twitter.com/lostandfound" target="_blank">Twitter</a><br>
+                        <a href="https://instagram.com/lostandfound" target="_blank">Instagram</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lost & Found System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

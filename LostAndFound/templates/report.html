@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <h1>Item Reporting</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('report_item') }}">Report Item</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Report an Item</h2>
+            <p>Provide details about the item you're reporting, including its condition and location.</p>
+        </div>
+    </div>
+
+    <!-- Flash Messages Section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert-container">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Report Form Section -->
+    <div class="form-container">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Item Name -->
+            <div class="form-group">
+                <label for="name">Item Name:</label>
+                {{ form.name(size=30) }}
+                <p>Please provide the name of the item you're reporting.</p>
+                {% if form.name.errors %}
+                    <div class="error-messages">
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Category (Dropdown) -->
+            <div class="form-group">
+                <label for="category">Category:</label>
+                {{ form.category() }}
+                <p>Please select the category of the item you're reporting.</p>
+                {% if form.category.errors %}
+                    <div class="error-messages">
+                        {% for error in form.category.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description:</label>
+                {{ form.description(rows=6, cols=40) }}
+                <p>Please explain what happened and provide any details about the item.</p>
+                {% if form.description.errors %}
+                    <div class="error-messages">
+                        {% for error in form.description.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label for="location">Location:</label>
+                {{ form.location(size=30) }}
+                <p>Please be specific about where you found or lost the item (e.g., room number, street name, etc.).</p>
+                {% if form.location.errors %}
+                    <div class="error-messages">
+                        {% for error in form.location.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Status (Dropdown) -->
+            <div class="form-group">
+                <label for="status">Status:</label>
+                {{ form.status() }}
+                <p>Please select the status of the item you're reporting (Lost or Found).</p>
+                {% if form.status.errors %}
+                    <div class="error-messages">
+                        {% for error in form.status.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn">Submit Report</button>
+        </form>
+    </div>
+
+    <!-- Back to Dashboard Link -->
+    <div class="back-link">
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Item Reporting System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Lost & Found System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h2>Our Mission</h2>
+            <p>The Lost & Found System is designed to help people reconnect with lost items. Users can easily report lost items or claim found belongings, ensuring a seamless and efficient recovery process.</p>
+        </section>
+
+        <section class="additional-info">
+            <h3>Why Choose Us?</h3>
+            <p>Our system provides a user-friendly interface and real-time updates to make the process of losing or finding items as hassle-free as possible. We prioritize user experience, security, and accessibility.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lost & Found System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
