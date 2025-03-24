@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Header and Navigation */
+        .header {
+            background: linear-gradient(45deg, #003366, #ffcc00); /* Blue to Mustard gradient */
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Depth for a more dynamic look */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .header .logo h1 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .header nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .header nav ul li {
+            margin: 0 20px;
+        }
+
+        .header nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .header nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+
+        /* Page Body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding-top: 80px; /* To avoid content being hidden under the fixed header */
+            background: #f4f6f9;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .search-container h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        .search-form {
+            margin-top: 20px;
+        }
+
+        .search-input {
+            padding: 12px 20px;
+            width: 60%;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .search-button {
+            padding: 12px 20px;
+            background-color: #ffcc00;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #e6b800;
+        }
+
+        .search-results {
+            margin-top: 40px;
+        }
+
+        .search-results h3 {
+            font-size: 28px;
+            color: #003366;
+        }
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .result-item {
+            background: #f9f9f9;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .item-header h4 {
+            font-size: 20px;
+            color: #003366;
+            margin: 0;
+        }
+
+        .item-date {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .item-image {
+            margin-top: 20px;
+        }
+
+        .item-image img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        .no-results {
+            font-size: 18px;
+            color: #ff0000;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .help-section {
+            margin-top: 50px;
+            background-color: #f8f9fc;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .help-section h3 {
+            font-size: 24px;
+            color: #003366;
+        }
+
+        .help-section a {
+            color: #003366;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #003366;
+            color: white;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body class="search-page">  <!-- Added class to target only search page styles -->
+
+    <header class="header">
+        <div class="logo">
+            <h1>Lost & Found System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('search') }}" class="active">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-container">
+            <h2>Search for Lost Items</h2>
+            <form method="POST" action="{{ url_for('search') }}" class="search-form">
+                <input type="text" name="query" placeholder="Enter keywords to find lost items..." value="{{ query or '' }}" class="search-input">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </section>
+
+        {% if results %}
+            <section class="search-results">
+                <h3>Search Results</h3>
+                <ul>
+                    {% for item in results %}
+                        <li class="result-item">
+                            <div class="item-header">
+                                <h4>{{ item.name }}</h4>
+                                <span class="item-date">Reported on: {{ item.date_reported.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                            <p><strong>Description:</strong> {{ item.description }}</p>
+                            <p><strong>Location:</strong> {{ item.location }}</p>
+                            <p><strong>Found by:</strong> {{ item.user.name }}</p>
+                            <p><strong>Contact:</strong> {{ item.user.email }} | {{ item.user.phone or 'No phone available' }}</p>
+                            
+                            {% if item.image_url %}
+                            <div class="item-image">
+                                <img src="{{ url_for('static', filename=item.image_url) }}" alt="Item Image" class="img-fluid" style="max-width: 200px;">
+                            </div>
+                            {% endif %}
+                        
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% else %}
+            <section class="no-results">
+                <p>No matching lost items found. Please try a different search term.</p>
+            </section>
+        {% endif %}
+
+        <!-- Need Help Section -->
+        <section class="help-section">
+            <h3>Contact Us</h3>
+            <p>Need help retrieving your lost item? Contact us, and we will assist you!</p>
+            <p><strong>Email:</strong> <a href="mailto:supportlostandfound@gmail.com">supportlostandfound@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+0841256094">+084 125 6094</a></p>
+            <p><strong>Office:</strong> Dut Steve Biko, S2 block , Level 4</p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Lost & Found System. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
