@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Thank You for Reporting!</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+           
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your item has been reported successfully!</h2>
+        <p>Thank you for using our platform to report your lost or found item. We’ll notify you if someone claims it.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lost & Found System</p>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+</head>
+<body>
+    <h2>Edit Item</h2>
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ item.name }}" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{ item.description }}</textarea><br>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" value="{{ item.category }}" required><br>
+        
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="Lost" {% if item.status == 'Lost' %}selected{% endif %}>Lost</option>
+            <option value="Found" {% if item.status == 'Found' %}selected{% endif %}>Found</option>
+        </select><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="{{ item.location }}" required><br>
+
+        <button type="submit">Update Item</button>
+    </form>
+    <a href="{{ url_for('admin_dashboard') }}">Cancel</a>
+</body>
+</html>                                                                                                                                                                                             <!DOCTYPE html>

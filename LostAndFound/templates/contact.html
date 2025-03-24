@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact-style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <h1>Lost & Found System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>If you need assistance or have any questions, feel free to reach out to us using the contact information below. Our support team is always here to help you!</p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <p><a href="supportlostandfound@gmail.com">supportlostandfound@gmail.com</a></p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+0841256094">+084 125 6094</a></p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h3>Office Address</h3>
+                        <p>Dut Steve Biko, S2 block , Level 4</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Lost & Found System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
