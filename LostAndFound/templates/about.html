@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about-style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>Lost & Found System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h2>Our Mission</h2>
+            <p>The Lost & Found System is designed to help people reconnect with lost items. Users can easily report lost items or claim found belongings, ensuring a seamless and efficient recovery process. We aim to bridge the gap between lost and found items with ease, providing a simple yet effective platform for everyone involved.</p>
+        </section>
+
+        <section class="about-values">
+            <h3>Our Core Values</h3>
+            <div class="values-container">
+                <div class="value-card">
+                    <h4>Efficiency</h4>
+                    <p>Our system offers quick reporting and immediate notifications for lost and found items.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Security</h4>
+                    <p>We prioritize the privacy and safety of all users, ensuring that all information is securely handled.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Accessibility</h4>
+                    <p>Our platform is accessible on all devices, providing an easy-to-use interface for everyone, regardless of technical expertise.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-choose-us">
+            <h3>Why Choose Us?</h3>
+            <p>Our Lost & Found system provides a user-friendly interface and real-time updates to make the process of losing or finding items as hassle-free as possible. We integrate seamless communication and ensure all lost and found items are tracked with precision. Our platform is designed for simplicity and effectiveness, ensuring that users can report or claim items with just a few clicks.</p>
+        </section>
+
+       
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lost & Found System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+

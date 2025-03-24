@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2e7d32, #81c784); /* Green gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #388e3c;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        button {
+            padding: 12px 0;
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background-color: #2c6e2c;
+        }
+
+        /* Style for buttons container */
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .cancel-link {
+            font-size: 16px;
+        }
+
+        .cancel-link a {
+            color: #388e3c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cancel-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Item</h2>
+        <form method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ item.name }}" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required>{{ item.description }}</textarea>
+
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="{{ item.category }}" required>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="Lost" {% if item.status == 'Lost' %}selected{% endif %}>Lost</option>
+                <option value="Found" {% if item.status == 'Found' %}selected{% endif %}>Found</option>
+            </select>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="{{ item.location }}" required>
+
+            <div class="buttons-container">
+                <button type="submit">Update Item</button>
+                <a href="{{ url_for('admin_dashboard') }}" class="cancel-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Lost & Found System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f6f9;
+        }
+
+        header {
+            background: linear-gradient(45deg, #003366, #ffcc00); /* Blue to Mustard gradient */
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Depth for a more dynamic look */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            transition: background 0.3s ease-in-out;
+        }
+
+        header .logo h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        nav ul li a.active {
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 100px auto; /* Adjust for fixed header */
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-welcome p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .profile-info {
+            background: #f8f9fc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info h3 {
+            margin-top: 0;
+            color: #003366;
+        }
+
+        .profile-details p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .flash-messages ul {
+            list-style: none;
+            padding: 0;
+            color: #721c24;
+            background-color: #f8d7da;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .flash-messages li {
+            margin-bottom: 5px;
+        }
+
+        .actions h3 {
+            color: #003366;
+            font-size: 22px;
+        }
+
+        .actions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .actions li {
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .btn-action:hover {
+            background-color: #002244;
+        }
+
+        .stats-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #f1f3f6;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+        }
+
+        .card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #003366;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>Lost & Found System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('dashboard') }}" class="active">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="dashboard-welcome">
+            <h2>Welcome, {{ current_user.name }}!</h2>
+            <p>You are successfully logged in.</p>
+        </section>
+
+        </section>
+
+        <section class="profile-info">
+            <h3>Your Profile</h3>
+            <div class="profile-details">
+                <p><strong>Email:</strong> {{ current_user.email }}</p>
+                <p><strong>Phone:</strong> {{ current_user.phone }}</p>
+            </div>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <section class="flash-messages">
+                    <ul>
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+        {% endwith %}
+
+        <section class="actions">
+            <h3>Quick Actions</h3>
+            <ul>
+                <li><a href="{{ url_for('report_item') }}" class="btn-action">Report an Item</a></li>
+                <li><a href="{{ url_for('search') }}" class="btn-action">Search for Items</a></li>
+                <li><a href="{{ url_for('logout') }}" class="btn-action">Logout</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lost & Found System. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
